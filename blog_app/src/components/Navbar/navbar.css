@@ -13,7 +13,7 @@
 
 .topLeft,
 .topRight {
-  flex: 3;
+  flex: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,4 +62,16 @@ a {
   color: #666;
   cursor: pointer;
   margin-left: 15px;
+}
+
+.logoImg {
+  width: 20%;
+}
+
+.logoDiv {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }

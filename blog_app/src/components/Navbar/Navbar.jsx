@@ -1,10 +1,22 @@
 import React from "react";
 import "./navbar.css";
-
+import { Link, useNavigate } from "react-router-dom";
+import camel from "../../imgs/logo.png";
 const Navbar = () => {
+  const user = false;
+
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    return navigate("/");
+  };
   return (
     <div className="top">
       <div className="topLeft">
+        <div className="logoDiv">
+          <img src={camel} alt="" className="logoImg" onClick={goHome} />
+        </div>
+
         <i className="topIcon fa-brands fa-square-facebook"></i>
         <i className="topIcon fa-brands fa-square-instagram"></i>
         <i className="topIcon fa-brands fa-square-github"></i>
@@ -12,29 +24,36 @@ const Navbar = () => {
       <div className="topCenter">
         <ul className="topList">
           <li className="topListItem">
-            <a href="#home">Home</a>
+            <Link to="/">HOME</Link>
           </li>
+          <li className="topListItem">ABOUT</li>
+          <li className="topListItem">CONTACT</li>
           <li className="topListItem">
-            <a href="#home">About</a>
+            <Link to="/newPost">WRITE</Link>
           </li>
-          <li className="topListItem">
-            <a href="#home">Contact</a>
-          </li>
-          <li className="topListItem">
-            <a href="#home">Write</a>
-          </li>
-          <li className="topListItem">
-            <a href="#home">Logout</a>
-          </li>
+          {user && <li className="topListItem">LOGOUT</li>}
         </ul>
       </div>
       <div className="topRight">
-        <img
-          className="topImg"
-          src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-          alt=""
-        />
-        <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
+        {user ? (
+          <Link to="/settings">
+            <img
+              className="topImg"
+              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              alt=""
+            />
+          </Link>
+        ) : (
+          <ul className="topList">
+            <li className="topListItem">
+              <Link to="/login">LOGIN</Link>
+            </li>
+            <li className="topListItem">
+              <Link to="/register">REGISTER</Link>
+            </li>
+          </ul>
+        )}
+        <i className="topSearchIcon fas fa-search"></i>
       </div>
     </div>
   );
