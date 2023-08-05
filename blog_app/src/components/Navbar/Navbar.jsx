@@ -3,13 +3,21 @@ import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import camel from "../../imgs/logo.png";
 import { UserContext } from "../../UserContext";
+import axios from "axios";
 const Navbar = () => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const goHome = () => {
     return navigate("/");
+  };
+
+  const logout = async (e) => {
+    e.preventDefault();
+    await axios.post("/api/user/logout");
+    setUser(null);
+    navigate("/");
   };
   return (
     <div className="top">
@@ -32,7 +40,11 @@ const Navbar = () => {
           <li className="topListItem">
             <Link to="/newPost">WRITE</Link>
           </li>
-          {user && <li className="topListItem">LOGOUT</li>}
+          {user && (
+            <li className="topListItem" onClick={logout}>
+              LOGOUT
+            </li>
+          )}
         </ul>
       </div>
       <div className="topRight">
