@@ -10,7 +10,7 @@ const {
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
-router.post("login", loginUser);
+router.post("/login", loginUser);
 router.put("/update", updateUser);
 router.post("/logout", logout);
 router.get("/", getUser);

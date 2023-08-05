@@ -7,38 +7,41 @@ const registerUser = async (req, res) => {
   const { username, email, password, profilePic } = req.body;
 
   try {
-    const userName = await User.findOne({ username });
-    if (userName) {
-      return res.status(401).json({ error: "This username is already taken" });
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(409).json({ error: "Username already taken" });
     }
-    const userEmail = await User.findOne({ email });
-    if (userEmail) {
-      return res
-        .status(401)
-        .json({ error: "You already have an account with this email" });
+
+    const existingEmail = await User.findOne({ email });
+    if (existingEmail) {
+      return res.status(409).json({ error: "Email already registered" });
     }
+
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = await User.create({
       username,
       email,
-      password: hash,
+      password: hashedPassword,
       profilePic,
     });
+
+    res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
-    res.status(401).json({ error: error.message });
+    console.error("Error during user registration:", error);
+    res.status(500).json({ error: "An error occurred during registration" });
   }
 };
 
 const loginUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(401).json({ error: "You have not sign up!" });
     }
-    const correct = bcrypt.compare(password, user.password);
+    const correct = await bcrypt.compare(password, user.password);
     if (!correct) {
       return res
         .status(422)

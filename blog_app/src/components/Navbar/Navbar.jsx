@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import camel from "../../imgs/logo.png";
+import { UserContext } from "../../UserContext";
 const Navbar = () => {
-  const user = false;
+  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 

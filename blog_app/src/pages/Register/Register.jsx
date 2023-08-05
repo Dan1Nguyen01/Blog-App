@@ -14,13 +14,13 @@ const Register = () => {
 
     try {
       const response = await axios.post("/api/user/register", {
-        userName,
+        username: userName,
         password,
         email,
       });
       response.data && window.location.replace("/login");
     } catch (error) {
-      setError(error.message);
+      setError(error.response.data.error);
     }
   };
   return (

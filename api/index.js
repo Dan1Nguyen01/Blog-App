@@ -35,7 +35,7 @@ mongoose
   .then(console.log("Connected to MongoDB"))
   .catch((error) => console.log(error));
 
-app.get("/api/test", (req, res) => {
+app.get("/test", (req, res) => {
   res.json("Hello World!");
 });
 //upload img from local
@@ -62,6 +62,9 @@ app.use("/api/post", postRoutes);
 
 const categoryRoutes = require("./routes/categoryRoutes");
 app.use("/api/category", categoryRoutes);
+
+const auth = require("./routes/authRoutes");
+app.use("/api/auth", auth);
 
 app.listen(process.env.PORT, () => {
   console.log("Listening to port: " + process.env.PORT);
