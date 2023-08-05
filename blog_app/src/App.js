@@ -9,7 +9,10 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 
+axios.defaults.baseURL = "http://localhost:6991";
+axios.defaults.withCredentials = true;
 const App = () => {
   return (
     <div>

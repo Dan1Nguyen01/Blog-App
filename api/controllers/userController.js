@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
-
+const Post = require("../models/Post");
 const registerUser = async (req, res) => {
   const { username, email, password, profilePic } = req.body;
 
@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         .status(401)
         .json({ error: "You already have an account with this email" });
     }
-    const salt = bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
     const newUser = await User.create({
@@ -75,7 +75,7 @@ const updateUser = async (req, res) => {
     }
 
     const salt = bcrypt.genSalt(10);
-    const hash = bcrypt.hash(passowrd, salt);
+    const hash = bcrypt.hash(password, salt);
 
     user.username = username;
     user.profilePic = profilePic;
@@ -89,4 +89,38 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, logout, updateUser };
+const deleteUser = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await User.findById(id);
+    try {
+      await Post.deleteMany({ username: user.username });
+      await User.findOneAndDelete(id);
+      res.status(200).json("User has been deleted...");
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } catch (err) {
+    res.status(404).json("User not found!");
+  }
+};
+
+const getUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    const { password, ...others } = user._doc;
+    res.status(200).json(others);
+  } catch (error) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports = {
+  registerUser,
+  loginUser,
+  logout,
+  updateUser,
+  deleteUser,
+  getUser,
+};

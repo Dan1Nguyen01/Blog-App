@@ -5,11 +5,15 @@ const {
   loginUser,
   logout,
   updateUser,
+  getUser,
+  deleteUser,
 } = require("../controllers/userController");
 
 router.post("/register", registerUser);
-router.post("l-ogin", loginUser);
+router.post("login", loginUser);
 router.put("/update", updateUser);
 router.post("/logout", logout);
+router.get("/", getUser);
+router.delete("/delete/:id", deleteUser);
 
 module.exports = router;
