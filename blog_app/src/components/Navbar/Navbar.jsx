@@ -13,6 +13,7 @@ const Navbar = () => {
     return navigate("/");
   };
 
+  const PF = "http://localhost:6991/images/";
   const logout = async (e) => {
     e.preventDefault();
     await axios.post("/api/user/logout");
@@ -32,14 +33,23 @@ const Navbar = () => {
       </div>
       <div className="topCenter">
         <ul className="topList">
-          <li className="topListItem">
-            <Link to="/">HOME</Link>
-          </li>
-          <li className="topListItem">ABOUT</li>
-          <li className="topListItem">CONTACT</li>
-          <li className="topListItem">
-            <Link to="/newPost">WRITE</Link>
-          </li>
+          {user && (
+            <li className="topListItem">
+              <Link to="/">HOME</Link>
+            </li>
+          )}
+
+          {user && (
+            <li className="topListItem">
+              <Link to="/yourposts">YOUR POSTS</Link>
+            </li>
+          )}
+
+          {user && (
+            <li className="topListItem">
+              <Link to="/newPost">WRITE</Link>
+            </li>
+          )}
           {user && (
             <li className="topListItem" onClick={logout}>
               LOGOUT
@@ -50,11 +60,7 @@ const Navbar = () => {
       <div className="topRight">
         {user ? (
           <Link to="/settings">
-            <img
-              className="topImg"
-              src="https://images.pexels.com/photos/1858175/pexels-photo-1858175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-            />
+            <img className="topImg" src={PF + user?.profilePic} alt="" />
           </Link>
         ) : (
           <ul className="topList">

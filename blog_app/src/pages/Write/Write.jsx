@@ -1,6 +1,12 @@
 import "./write.css";
 import coffee from "../../imgs/coffe1.jpeg";
+import { UserContext } from "../../UserContext";
+import { useContext, useState } from "react";
 const Write = () => {
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [file, setFile] = useState(null);
+  const { user } = useContext(UserContext);
   return (
     <div className="write">
       <img src={coffee} alt="" className="writeImg" />

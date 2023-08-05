@@ -1,11 +1,17 @@
 const User = require("../models/User");
 const Post = require("../models/Post");
 const Category = require("../models/Category");
-const newPost = async (req, res) => {
-  const newPost = new Post(req.body);
+const jwt = require("jsonwebtoken");
+const newPost = (req, res) => {
+  const { title, desc, photo, username, categories } = req.body;
+  const { token } = req.cookies;
   try {
-    const savedPost = await newPost.save();
-    res.status(200).json(savedPost);
+    jwt.verify(token, process.env.JWTSECRET, {}, async (error, tokenData) => {
+      if (error) throw error;
+      const post = await Post.create(req.body);
+      const savedPost = await post.save();
+      res.status(200).json(savedPost);
+    });
   } catch (err) {
     res.status(500).json(err);
   }

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./sidebar.css";
+import "./authorSidebar.css";
 import me from "../../imgs/AI-2.jpg";
 import axios from "axios";
 import { UserContext } from "../../UserContext";
-const Sidebar = () => {
+const AuthorSidebar = () => {
   const [cates, setCates] = useState([]);
   const { user } = useContext(UserContext);
   useEffect(() => {
@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebarItem">
-        <span className="sidebarTitle">About Me</span>
+        <span className="sidebarTitle">About Author</span>
         <img src={me} alt="" className="sidebarImg" />
         <p>
           test test test test test testtest testtest testtesttesttesttesttest
@@ -46,4 +46,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default AuthorSidebar;

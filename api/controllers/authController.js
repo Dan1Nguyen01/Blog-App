@@ -14,8 +14,10 @@ const userProfile = (req, res) => {
   if (token) {
     jwt.verify(token, process.env.JWTSECRET, {}, async (error, tokenData) => {
       if (error) throw error;
-      const { name, email, _id } = await User.findById(tokenData.id);
-      res.status(200).json({ name, email, _id });
+      const { name, email, _id, profilePic } = await User.findById(
+        tokenData.id
+      );
+      res.status(200).json({ name, email, _id, profilePic });
     });
   }
   // res.status(400).json("Token is null");

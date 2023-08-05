@@ -1,12 +1,33 @@
 import "./singlePost.css";
 import testPhoto from "../../imgs/Blog-test.jpg";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../UserContext";
+import axios from "axios";
 const SinglePost = () => {
+  const { id } = useParams();
+  const [post, setPost] = useState({});
+  const PF = "http://localhost:6991/images/";
+  const { user } = useContext(UserContext);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [updateMode, setUpdateMode] = useState(false);
+
+  useEffect(() => {
+    const getAPost = async () => {
+      const res = await axios.get(`/api/post/${id}`);
+      setPost(res?.data);
+      setTitle(res?.data?.title);
+      setDesc(res?.data?.desc);
+    };
+    getAPost();
+  }, []);
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img src={testPhoto} alt="" className="singlePostImg" />
+        <img src={PF + post?.photo} alt="" className="singlePostImg" />
         <h1 className="singlePostTitle">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {title}
           <div className="singlePostEdit">
             <i className="singlePostIcon fa-solid fa-pen-to-square"></i>
             <i className="singlePostIcon fa-solid fa-trash"></i>
@@ -14,31 +35,14 @@ const SinglePost = () => {
         </h1>
         <div className="singlePostInfo">
           <span className="singlePostAuthor">
-            Author: <b>Dan</b>
+            Author: <b>{post?.username}</b>
           </span>
 
-          <span className="singlePostDate">1 hour ago</span>
+          <span className="singlePostDate">
+            {new Date(post.createAt).toDateString()}
+          </span>
         </div>
-        <p className="singlePostDesc">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa sed
-          reprehenderit itaque odio officia? Magnam illum id, sed repudiandae
-          odit hic voluptates veritatis necessitatibus repellendus nemo iste
-          blanditiis sint recusandae! Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Ipsa sed reprehenderit itaque odio officia? Magnam
-          illum id, sed repudiandae odit hic voluptates veritatis necessitatibus
-          repellendus nemo iste blanditiis sint recusandae! Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Ipsa sed reprehenderit itaque
-          odio officia? Magnam illum id, sed repudiandae odit hic voluptates
-          veritatis necessitatibus repellendus nemo iste blanditiis sint
-          recusandae! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Ipsa sed reprehenderit itaque odio officia? Magnam illum id, sed
-          repudiandae odit hic voluptates veritatis necessitatibus repellendus
-          nemo iste blanditiis sint recusandae! Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Ipsa sed reprehenderit itaque odio
-          officia? Magnam illum id, sed repudiandae odit hic voluptates
-          veritatis necessitatibus repellendus nemo iste blanditiis sint
-          recusandae!
-        </p>
+        <p className="singlePostDesc">{desc}</p>
       </div>
     </div>
   );

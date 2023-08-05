@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import { UserContextProvider } from "./UserContext";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
+import YourPosts from "./pages/Your Posts/YourPosts";
 
 axios.defaults.baseURL = "http://localhost:6991";
 axios.defaults.withCredentials = true;
@@ -21,7 +22,8 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route index element={<Home />} />
-            <Route path="/single:id" element={<Single />} />
+            <Route path="/yourposts" element={<YourPosts />} />
+            <Route path="/post/:id" element={<Single />} />
             <Route path="/newpost" element={<Write />} />
             <Route path="/settings" element={<Setting />} />
             <Route path="/login" element={<Login />} />

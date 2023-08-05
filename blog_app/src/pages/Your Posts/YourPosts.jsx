@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./posts.css";
-import Post from "../Post/Post";
+import "./yourpost.css";
+import Post from "../../components/Post/Post";
 import axios from "axios";
-const Posts = () => {
+const YourPosts = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -35,4 +35,4 @@ const Posts = () => {
   );
 };
 
-export default Posts;
+export default YourPosts;
