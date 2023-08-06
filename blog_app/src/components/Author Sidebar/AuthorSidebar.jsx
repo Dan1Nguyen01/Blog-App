@@ -3,9 +3,11 @@ import "./authorSidebar.css";
 import me from "../../imgs/AI-2.jpg";
 import axios from "axios";
 import { UserContext } from "../../UserContext";
-const AuthorSidebar = () => {
+const AuthorSidebar = ({ post }) => {
   const [cates, setCates] = useState([]);
-  const { user } = useContext(UserContext);
+  const [authorData, setAuthorData] = useState(null);
+  const username = post?.username;
+
   useEffect(() => {
     const getCates = async () => {
       const res = await axios.get("/api/category");
@@ -13,15 +15,27 @@ const AuthorSidebar = () => {
     };
     getCates();
   }, []);
+
+  useEffect(() => {
+    const getAuthor = async () => {
+      try {
+        console.log("author right here: " + username);
+        const res = await axios.get("/api/user/", { username });
+        setAuthorData(res.data);
+        console.log("data right here " + res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAuthor();
+  }, [username]);
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">About Author</span>
-        <img src={me} alt="" className="sidebarImg" />
-        <p>
-          test test test test test testtest testtest testtesttesttesttesttest
-          test test test vtest test test test
-        </p>
+        <img src={authorData?.profilePic} alt="" className="sidebarImg" />
+        <h3>{authorData?.username}</h3>
+        <p>{authorData?.intro}</p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">Categories</span>

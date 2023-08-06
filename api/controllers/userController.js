@@ -109,13 +109,14 @@ const deleteUser = async (req, res) => {
 };
 
 const getUser = async (req, res) => {
-  const { id } = req.params;
+  const { username } = req.body;
+  console.log(req.body);
   try {
-    const user = await User.findById(id);
+    const user = await User.findOne(username);
     const { password, ...others } = user._doc;
     res.status(200).json(others);
   } catch (error) {
-    res.status(500).json(err);
+    res.status(500).json(error);
   }
 };
 
