@@ -21,16 +21,6 @@ const Posts = () => {
             <Post post={p} />
           </div>
         ))}
-
-      <Post />
-
-      <Post />
-
-      <Post />
-
-      <Post />
-
-      <Post />
     </div>
   );
 };

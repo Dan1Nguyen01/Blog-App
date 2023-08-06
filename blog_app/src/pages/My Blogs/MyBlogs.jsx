@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./yourpost.css";
+import "./myblogs.css";
 import Post from "../../components/Post/Post";
 import axios from "axios";
-const YourPosts = () => {
+const MyBlogs = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -21,18 +21,8 @@ const YourPosts = () => {
             <Post post={p} />
           </div>
         ))}
-
-      <Post />
-
-      <Post />
-
-      <Post />
-
-      <Post />
-
-      <Post />
     </div>
   );
 };
 
-export default YourPosts;
+export default MyBlogs;

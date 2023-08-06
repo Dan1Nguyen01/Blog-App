@@ -41,7 +41,7 @@ const Navbar = () => {
 
           {user && (
             <li className="topListItem">
-              <Link to="/yourposts">YOUR POSTS</Link>
+              <Link to="/myblog">MY BLOGS</Link>
             </li>
           )}
 

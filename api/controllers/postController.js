@@ -3,12 +3,20 @@ const Post = require("../models/Post");
 const Category = require("../models/Category");
 const jwt = require("jsonwebtoken");
 const newPost = (req, res) => {
-  const { title, desc, photo, username, categories } = req.body;
+  // const { title, desc, photo, username, categories } = req.body;
+  const { title, desc, photo } = req.body;
   const { token } = req.cookies;
+  console.log("where is the photo: " + photo);
   try {
     jwt.verify(token, process.env.JWTSECRET, {}, async (error, tokenData) => {
       if (error) throw error;
-      const post = await Post.create(req.body);
+      const post = await Post.create({
+        username: tokenData.username,
+        title,
+        desc,
+        photo,
+      });
+      console.log(post);
       const savedPost = await post.save();
       res.status(200).json(savedPost);
     });

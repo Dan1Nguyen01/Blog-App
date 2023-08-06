@@ -2,13 +2,20 @@
   padding-top: 50px;
 }
 
+.img-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-div {
+  margin-button: 20px;
+}
 .writeImg {
   margin-left: 150px;
-  width: 70vh;
-  height: 250px;
   border-radius: 10px;
-  object-fit: scale-down;
-  /* object-fit: cover; */
+  max-width: 500px;
+  object-fit: cover;
 }
 
 .writeForm {

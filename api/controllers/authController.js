@@ -20,7 +20,6 @@ const userProfile = (req, res) => {
       res.status(200).json({ name, email, _id, profilePic });
     });
   }
-  // res.status(400).json("Token is null");
 };
 
 module.exports = userProfile;

@@ -25,7 +25,10 @@ const SinglePost = () => {
   return (
     <div className="singlePost">
       <div className="singlePostWrapper">
-        <img src={PF + post?.photo} alt="" className="singlePostImg" />
+        <div className="singlePostImg-div">
+          <img src={PF + post?.photo} alt="" className="singlePostImg" />
+        </div>
+
         <h1 className="singlePostTitle">
           {title}
           <div className="singlePostEdit">
@@ -39,7 +42,7 @@ const SinglePost = () => {
           </span>
 
           <span className="singlePostDate">
-            {new Date(post.createAt).toDateString()}
+            {new Date(post?.createdAt).toDateString()}
           </span>
         </div>
         <p className="singlePostDesc">{desc}</p>

@@ -41,17 +41,24 @@ app.get("/test", (req, res) => {
 //upload img from local
 const upload = multer({ dest: "images" });
 const fs = require("fs");
-app.post("/api/upload", upload.array("photos", 100), (req, res) => {
-  const [uploadedFiles] = [];
-  for (let i = 0; i < req.files.length; i++) {
-    const { path, originalname } = req.file[i];
+
+const uploadedFiles = []; // Initialize an array to hold uploaded file paths
+
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  try {
+    const { path, originalname } = req.file;
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
     uploadedFiles.push(newPath.replace(`images\\`, ""));
+
+    res.status(200).json({ message: "File has been uploaded", uploadedFiles });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "An error occurred while processing the upload." });
   }
-  res.status(200).json("File has been uploaded");
 });
 
 const userRoutes = require("./routes/userRoutes");
