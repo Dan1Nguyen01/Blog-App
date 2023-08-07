@@ -14,7 +14,7 @@ const Write = () => {
   const { user } = useContext(UserContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const PF = "https://blog-5qcp4ev2p-dan1nguyen01.vercel.app/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
 
   const handlePost = async (e) => {
     e.preventDefault();

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
   const { user, setUser } = useContext(UserContext);
-  const PF = "https://blog-5qcp4ev2p-dan1nguyen01.vercel.app/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
   const [username, setUsername] = useState(user?.username);
   const [email, setEmail] = useState(user?.email);
   const [password, setPassword] = useState("");

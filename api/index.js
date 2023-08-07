@@ -9,21 +9,19 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use(express.static(path.join(__dirname, "build")));
+
 app.use(
   cors({
     credentials: true,
-    origin: "https://blog-app-opal-mu.vercel.app",
+    origin: "https://camel-blog.onrender.com",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://blog-app-opal-mu.vercel.app"
-  ); // Replace with your frontend origin
+  res.header("Access-Control-Allow-Origin", "https://camel-blog.onrender.com"); // Replace with your frontend origin
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE"); // Include PUT in the allowed methods
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Credentials", true);
