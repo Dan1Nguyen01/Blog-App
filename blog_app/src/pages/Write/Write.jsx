@@ -14,7 +14,7 @@ const Write = () => {
   const { user } = useContext(UserContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const PF = "http://localhost:6991/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
 
   const handlePost = async (e) => {
     e.preventDefault();

@@ -13,7 +13,7 @@ const Navbar = () => {
     return navigate("/");
   };
 
-  const PF = "http://localhost:6991/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
   const logout = async (e) => {
     e.preventDefault();
     await axios.post("/api/user/logout");

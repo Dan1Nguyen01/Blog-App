@@ -12,7 +12,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import MyBlogs from "./pages/My Blogs/MyBlogs";
 
-axios.defaults.baseURL = "http://localhost:6991";
+axios.defaults.baseURL = "https://camel-blog.onrender.com/";
 axios.defaults.withCredentials = true;
 const App = () => {
   return (

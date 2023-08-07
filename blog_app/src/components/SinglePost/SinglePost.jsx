@@ -5,7 +5,7 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const SinglePost = ({ post, title, setTitle, desc, setDesc }) => {
-  const PF = "http://localhost:6991/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
 
   const [updateMode, setUpdateMode] = useState(false);
 

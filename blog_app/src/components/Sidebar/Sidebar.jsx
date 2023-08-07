@@ -13,7 +13,7 @@ const Sidebar = () => {
     getCates();
   }, []);
 
-  const PF = "http://localhost:6991/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
   const newUserImg = user
     ? user?.profilePic
     : "e528acc397a9780c1f75b382fafe9250.jpg";

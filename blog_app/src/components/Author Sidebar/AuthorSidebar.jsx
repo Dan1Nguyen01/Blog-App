@@ -29,7 +29,7 @@ const AuthorSidebar = ({ post }) => {
     };
     getAuthor();
   }, [username]);
-  const PF = "http://localhost:6991/images/";
+  const PF = "https://camel-blog.onrender.com/images/";
   return (
     <div className="sidebar">
       <div className="sidebarItem">
