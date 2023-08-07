@@ -42,10 +42,22 @@ app.get("/test", (req, res) => {
   res.json("Hello World!");
 });
 //upload img from local
-const upload = multer({ dest: "images" });
 const fs = require("fs");
-
 const uploadedFiles = []; // Initialize an array to hold uploaded file paths
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      const uploadPath = path.join(__dirname, "images"); // Absolute path to the "images" directory
+      fs.mkdirSync(uploadPath, { recursive: true }); // Create directory if it doesn't exist
+      cb(null, uploadPath);
+    },
+    filename: (req, file, cb) => {
+      const filename = file.originalname;
+      cb(null, filename);
+    },
+  }),
+});
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
