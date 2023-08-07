@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div>
       <UserContextProvider>
-        <HashRouter>
+        <BrowserRouter>
           <Navbar />
           <Routes>
             <Route index element={<Home />} />
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </UserContextProvider>
     </div>
   );
