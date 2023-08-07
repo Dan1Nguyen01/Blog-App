@@ -13,7 +13,7 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(
   cors({
     credentials: true,
-    origin: "https://fine-erin-colt-tie.cyclic.app",
+    origin: "https://blog-app-opal-mu.vercel.app",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
@@ -22,7 +22,7 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   res.header(
     "Access-Control-Allow-Origin",
-    "https://fine-erin-colt-tie.cyclic.app"
+    "https://blog-app-opal-mu.vercel.app"
   ); // Replace with your frontend origin
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE"); // Include PUT in the allowed methods
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
