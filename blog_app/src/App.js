@@ -8,7 +8,7 @@ import Setting from "./pages/Settings/Setting";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import { UserContextProvider } from "./UserContext";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import axios from "axios";
 import MyBlogs from "./pages/My Blogs/MyBlogs";
 
@@ -18,7 +18,7 @@ const App = () => {
   return (
     <div>
       <UserContextProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Navbar />
           <Routes>
             <Route index element={<Home />} />
@@ -29,7 +29,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </UserContextProvider>
     </div>
   );
