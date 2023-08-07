@@ -9,19 +9,18 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, "build")));
-
+app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(
   cors({
     credentials: true,
-    origin: "https://camel-blog.onrender.com",
+    origin: "https://camel-blog.onrender.com/",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
-  res.header("Access-Control-Allow-Origin", "https://camel-blog.onrender.com"); // Replace with your frontend origin
+  res.header("Access-Control-Allow-Origin", "https://camel-blog.onrender.com/"); // Replace with your frontend origin
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE"); // Include PUT in the allowed methods
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Credentials", true);
@@ -40,22 +39,10 @@ app.get("/test", (req, res) => {
   res.json("Hello World!");
 });
 //upload img from local
+const upload = multer({ dest: "images" });
 const fs = require("fs");
-const uploadedFiles = []; // Initialize an array to hold uploaded file paths
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      const uploadPath = path.join(__dirname, "images"); // Absolute path to the "images" directory
-      fs.mkdirSync(uploadPath, { recursive: true }); // Create directory if it doesn't exist
-      cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-      const filename = file.originalname;
-      cb(null, filename);
-    },
-  }),
-});
+const uploadedFiles = []; // Initialize an array to hold uploaded file paths
 
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
@@ -64,7 +51,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace(`images${path.sep}`, ""));
+    uploadedFiles.push(newPath.replace(`images\\`, ""));
 
     res.status(200).json({ message: "File has been uploaded", uploadedFiles });
   } catch (error) {
