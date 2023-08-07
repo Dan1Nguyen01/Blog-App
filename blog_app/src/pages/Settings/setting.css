@@ -80,3 +80,18 @@
   margin-top: 20px;
   cursor: pointer;
 }
+
+.writeImg {
+  border-radius: 50%;
+  border: 2px solid rgb(92, 92, 92);
+  width: 40%;
+}
+
+.settingTextarea {
+  color: gray;
+  margin: 10px 0;
+  padding: 8px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  resize: vertical; /* Allow vertical resizing */
+}

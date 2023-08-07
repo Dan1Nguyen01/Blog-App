@@ -4,7 +4,7 @@ const Category = require("../models/Category");
 const jwt = require("jsonwebtoken");
 const newPost = (req, res) => {
   // const { title, desc, photo, username, categories } = req.body;
-  const { title, desc, photo } = req.body;
+  const { title, desc, photo, categories } = req.body;
   const { token } = req.cookies;
   console.log("where is the photo: " + photo);
   try {
@@ -15,6 +15,7 @@ const newPost = (req, res) => {
         title,
         desc,
         photo,
+        categories,
       });
       console.log(post);
       const savedPost = await post.save();
@@ -29,21 +30,18 @@ const updatePost = async (req, res) => {
   const { id } = req.params;
   try {
     const post = await Post.findById(id);
-    if (post.username === req.body.username) {
-      try {
-        const updatedPost = await Post.findByIdAndUpdate(
-          req.params.id,
-          {
-            $set: req.body,
-          },
-          { new: true }
-        );
-        res.status(200).json(updatedPost);
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    } else {
-      res.status(401).json("You can update only your post!");
+
+    try {
+      const updatedPost = await Post.findByIdAndUpdate(
+        id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedPost);
+    } catch (err) {
+      res.status(500).json(err);
     }
   } catch (err) {
     res.status(500).json(err);
@@ -53,18 +51,10 @@ const updatePost = async (req, res) => {
 //DELETE POST
 const deletePost = async (req, res) => {
   const { id } = req.params;
+  const { username } = req.body;
   try {
-    const post = await Post.findById(id);
-    if (post.username === req.body.username) {
-      try {
-        await post.delete();
-        res.status(200).json("Post has been deleted...");
-      } catch (err) {
-        res.status(500).json(err);
-      }
-    } else {
-      res.status(401).json("You can delete only your post!");
-    }
+    const post = await Post.findByIdAndDelete(id);
+    res.status(200).json("Post has been deleted...");
   } catch (err) {
     res.status(500).json(err);
   }

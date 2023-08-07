@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./sidebar.css";
-import me from "../../imgs/AI-2.jpg";
 import axios from "axios";
 import { UserContext } from "../../UserContext";
 const Sidebar = () => {
@@ -13,24 +12,58 @@ const Sidebar = () => {
     };
     getCates();
   }, []);
+
+  const PF = "http://localhost:6991/images/";
+  const newUserImg = user
+    ? user?.profilePic
+    : "e528acc397a9780c1f75b382fafe9250.jpg";
+
+  const newUserIntro = user ? (
+    user?.intro
+  ) : (
+    <div className="introParagraphs">
+      <p>
+        Embark on a journey of insights and inspiration at Camel Blog App. Join
+        our community of curious minds and passionate writers, where every post
+        is a gateway to new ideas.
+      </p>
+      <p>
+        From captivating stories to practical advice, our blog covers diverse
+        topics that matter to you. Explore, engage, and connect with fellow
+        readers as we bring you fresh perspectives and thought-provoking
+        content.
+      </p>
+      <p>
+        Discover a world of knowledge, creativity, and connection right here at
+        Camel Blog App. Happy reading!
+      </p>
+      <p>
+        Sincerely,
+        <br />
+        The Camel Blog App Team (Dan Nguyen)
+      </p>
+    </div>
+  );
+
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">About Me</span>
-        <img src={me} alt="" className="sidebarImg" />
-        <p>
-          test test test test test testtest testtest testtesttesttesttesttest
-          test test test vtest test test test
-        </p>
+        <img src={PF + newUserImg} alt="" className="sidebarImg" />
+        {newUserIntro}
       </div>
       <div className="sidebarItem">
-        <span className="sidebarTitle">Categories</span>
+        {user && <span className="sidebarTitle">Categories</span>}
         <ul className="sidebarList">
-          <li className="sidebarListItem">Life</li>
-          <li className="sidebarListItem">Music</li>
-          <li className="sidebarListItem">Style</li>
-          <li className="sidebarListItem">Sport</li>
-          <li className="sidebarListItem">Tech</li>
+          {user?.categories?.length > 0 &&
+            user?.categories.map((categoryId, index) => {
+              const category = cates.find((cat) => cat._id === categoryId);
+              return (
+                <li className="sidebarListItem" key={index}>
+                  {category ? category.name : "Unknown Category"}
+                </li>
+              );
+            })}
         </ul>
       </div>
 

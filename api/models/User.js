@@ -25,6 +25,13 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
+    categories: [
+      {
+        type: mongoose.Schema.Types.ObjectId, // Reference to the Category model
+        ref: "Category",
+      },
+    ],
   },
   { timestamps: true }
 );

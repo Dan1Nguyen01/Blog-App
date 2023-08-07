@@ -1,0 +1,119 @@
+.categoryTable {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 20px; /* Adjust the distance from the bottom */
+  right: 20px; /* Adjust the distance from the right */
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.searchInput,
+.addInput {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+}
+
+.categoryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.categoryItem:hover {
+  background-color: #f5f5f5;
+}
+
+.noMatchItem {
+  color: #888;
+}
+
+.addButton {
+  background-color: teal;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.selectedCategories {
+  margin-top: 20px;
+}
+
+.selectedCategoryList {
+  list-style: none;
+  padding: 0;
+}
+
+.selectedCategoryItem {
+  padding: 5px;
+  background-color: teal;
+  color: white;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.selectedCategoryItem:hover {
+  background-color: #0d8a6e;
+}
+
+/* ... previous CSS rules ... */
+
+.selectedCategories {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selectedCategoryList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selectedCategoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  background-color: teal;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.selectedCategoryItem:hover {
+  background-color: #0d8a6e;
+}
+
+.removeButton {
+  border: none;
+  padding: 1px 2px;
+  cursor: pointer;
+  margin-left: 10px;
+  background-color: transparent;
+}

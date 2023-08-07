@@ -59,9 +59,15 @@ const Navbar = () => {
       </div>
       <div className="topRight">
         {user ? (
-          <Link to="/settings">
-            <img className="topImg" src={PF + user?.profilePic} alt="" />
-          </Link>
+          user?.profilePic != "" ? (
+            <Link to="/settings">
+              <img className="topImg" src={PF + user?.profilePic} alt="" />
+            </Link>
+          ) : (
+            <Link to="/settings">
+              <i className="fa-solid fa-user"></i>
+            </Link>
+          )
         ) : (
           <ul className="topList">
             <li className="topListItem">

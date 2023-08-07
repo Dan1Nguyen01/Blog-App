@@ -29,22 +29,27 @@ const AuthorSidebar = ({ post }) => {
     };
     getAuthor();
   }, [username]);
+  const PF = "http://localhost:6991/images/";
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">About Author</span>
-        <img src={authorData?.profilePic} alt="" className="sidebarImg" />
+        <img src={PF + authorData?.profilePic} alt="" className="sidebarImg" />
         <h3>{authorData?.username}</h3>
         <p>{authorData?.intro}</p>
       </div>
       <div className="sidebarItem">
         <span className="sidebarTitle">Categories</span>
         <ul className="sidebarList">
-          <li className="sidebarListItem">Life</li>
-          <li className="sidebarListItem">Music</li>
-          <li className="sidebarListItem">Style</li>
-          <li className="sidebarListItem">Sport</li>
-          <li className="sidebarListItem">Tech</li>
+          {authorData?.categories?.length > 0 &&
+            authorData?.categories.map((categoryId, index) => {
+              const category = cates.find((cat) => cat._id === categoryId);
+              return (
+                <li className="sidebarListItem" key={index}>
+                  {category ? category.name : "Unknown Category"}
+                </li>
+              );
+            })}
         </ul>
       </div>
 

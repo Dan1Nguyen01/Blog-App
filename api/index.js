@@ -61,6 +61,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 
+app.use(express.static("./build file/build"));
+
 const userRoutes = require("./routes/userRoutes");
 app.use("/api/user", userRoutes);
 

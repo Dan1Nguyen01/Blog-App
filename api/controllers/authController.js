@@ -14,10 +14,11 @@ const userProfile = (req, res) => {
   if (token) {
     jwt.verify(token, process.env.JWTSECRET, {}, async (error, tokenData) => {
       if (error) throw error;
-      const { name, email, _id, profilePic } = await User.findById(
-        tokenData.id
-      );
-      res.status(200).json({ name, email, _id, profilePic });
+      const { username, email, _id, profilePic, intro, categories } =
+        await User.findById(tokenData.id);
+      res
+        .status(200)
+        .json({ username, email, _id, profilePic, intro, categories });
     });
   }
 };

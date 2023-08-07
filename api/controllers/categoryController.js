@@ -1,9 +1,14 @@
 const Category = require("../models/Category");
 const newCategory = async (req, res) => {
-  const newCate = new Category(req.body);
+  const { name } = req.body;
   try {
-    const saveCategory = await newCate.save();
-    res.status(200).json(saveCategory);
+    const category = await Category.findOne({ name: name });
+    if (category) {
+      return res.json({ error: "Category can't be doublicated" });
+    }
+    const newCate = await Category.create({ name });
+
+    res.status(200).json(newCate);
   } catch (err) {
     res.status(500).json(err);
   }

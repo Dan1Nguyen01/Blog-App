@@ -70,25 +70,52 @@ const logout = (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { username, profilePic, email, password, id } = req.body;
+  const { username, profilePic, email, id, categories } = req.body;
+
+  try {
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "No such user" });
+    }
+    const posts = await Post.find({ username: user.username });
+    user.username = username;
+    user.profilePic = profilePic;
+    user.email = email;
+    user.categories = categories;
+
+    for (const post of posts) {
+      post.username = username;
+      await post.save();
+    }
+
+    // Save the updated user and posts
+    await Promise.all([user.save(), ...posts.map((post) => post.save())]);
+    return res.json({ message: "User updated successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  const { id, password, newPassword } = req.body;
   try {
     const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ error: "No such user" });
     }
-
-    const salt = bcrypt.genSalt(10);
-    const hash = bcrypt.hash(password, salt);
-
-    user.username = username;
-    user.profilePic = profilePic;
-    user.email = email;
-    user.password = hash;
-
-    await user.save();
-    res.json({ message: "User updated successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    const correctPassword = await bcrypt.compare(password, user.password);
+    if (correctPassword) {
+      const salt = await bcrypt.genSalt(10);
+      const hash = await bcrypt.hash(newPassword, salt);
+      user.password = hash;
+      await user.save();
+      res.json({ message: "Password updated successfully!" });
+    } else {
+      res.json({ message: "Current password is wrong!" });
+    }
+  } catch (err) {
+    return res.status(500).json({ erorr: error.message });
   }
 };
 
@@ -125,6 +152,7 @@ module.exports = {
   loginUser,
   logout,
   updateUser,
+  updatePassword,
   deleteUser,
   getUser,
 };
