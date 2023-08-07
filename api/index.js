@@ -9,7 +9,8 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 app.use(
   cors({
     credentials: true,
@@ -51,7 +52,8 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     const ext = parts[parts.length - 1];
     const newPath = path + "." + ext;
     fs.renameSync(path, newPath);
-    uploadedFiles.push(newPath.replace(`images\\`, ""));
+    //  uploadedFiles.push(newPath.replace(`images\\`, ""));
+    uploadedFiles.push(newPath);
 
     res.status(200).json({ message: "File has been uploaded", uploadedFiles });
   } catch (error) {
