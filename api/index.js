@@ -44,16 +44,10 @@ const upload = multer({ dest: "images" });
 const fs = require("fs");
 
 const uploadedFiles = []; // Initialize an array to hold uploaded file paths
-
 app.post("/api/upload", upload.single("file"), (req, res) => {
   try {
     const { path, originalname } = req.file;
-    const parts = originalname.split(".");
-    const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
-    fs.renameSync(path, newPath);
-    //  uploadedFiles.push(newPath.replace(`images\\`, ""));
-    uploadedFiles.push(newPath);
+    uploadedFiles.push(originalname); // Push the original file name without modifications
 
     res.status(200).json({ message: "File has been uploaded", uploadedFiles });
   } catch (error) {
@@ -62,6 +56,24 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
       .json({ error: "An error occurred while processing the upload." });
   }
 });
+
+// app.post("/api/upload", upload.single("file"), (req, res) => {
+//   try {
+//     const { path, originalname } = req.file;
+//     const parts = originalname.split(".");
+//     const ext = parts[parts.length - 1];
+//     const newPath = path + "." + ext;
+//     fs.renameSync(path, newPath);
+//     //  uploadedFiles.push(newPath.replace(`images\\`, ""));
+//     uploadedFiles.push(newPath);
+
+//     res.status(200).json({ message: "File has been uploaded", uploadedFiles });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: "An error occurred while processing the upload." });
+//   }
+// });
 
 app.use(express.static("./build file/build"));
 
