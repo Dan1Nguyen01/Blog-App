@@ -13,7 +13,7 @@ const Navbar = () => {
     return navigate("/");
   };
 
-  const PF = "https://camel-blog.onrender.com/images/";
+  const PF = "https://fine-erin-colt-tie.cyclic.app/images/";
   const logout = async (e) => {
     e.preventDefault();
     await axios.post("/api/user/logout");

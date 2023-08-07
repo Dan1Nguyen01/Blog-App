@@ -29,7 +29,7 @@ const AuthorSidebar = ({ post }) => {
     };
     getAuthor();
   }, [username]);
-  const PF = "https://camel-blog.onrender.com/images/";
+  const PF = "https://fine-erin-colt-tie.cyclic.app/images/";
   return (
     <div className="sidebar">
       <div className="sidebarItem">
