@@ -13,7 +13,7 @@ const Sidebar = () => {
     getCates();
   }, []);
 
-  const PF = "https://fine-erin-colt-tie.cyclic.app/images/";
+  const PF = "https://blog-5qcp4ev2p-dan1nguyen01.vercel.app/images/";
   const newUserImg = user
     ? user?.profilePic
     : "e528acc397a9780c1f75b382fafe9250.jpg";

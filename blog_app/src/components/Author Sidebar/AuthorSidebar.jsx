@@ -29,7 +29,7 @@ const AuthorSidebar = ({ post }) => {
     };
     getAuthor();
   }, [username]);
-  const PF = "https://fine-erin-colt-tie.cyclic.app/images/";
+  const PF = "https://blog-5qcp4ev2p-dan1nguyen01.vercel.app/images/";
   return (
     <div className="sidebar">
       <div className="sidebarItem">

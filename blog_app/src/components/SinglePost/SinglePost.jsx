@@ -5,7 +5,7 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const SinglePost = ({ post, title, setTitle, desc, setDesc }) => {
-  const PF = "https://fine-erin-colt-tie.cyclic.app/images/";
+  const PF = "https://blog-5qcp4ev2p-dan1nguyen01.vercel.app/images/";
 
   const [updateMode, setUpdateMode] = useState(false);
 
