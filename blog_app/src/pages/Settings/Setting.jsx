@@ -30,15 +30,15 @@ const Setting = () => {
           },
         })
         .then((response) => {
-          const { data: uploadedFiles } = response;
-          setPhoto(
-            uploadedFiles.uploadedFiles[uploadedFiles.uploadedFiles.length - 1]
-          );
-          console.log(
-            "File uploaded successfully:",
-            uploadedFiles.uploadedFiles[uploadedFiles.uploadedFiles.length - 1]
-          );
-          console.log("File uploaded successfully:", uploadedFiles);
+          const uploadedFiles = response.data;
+          if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
+            setPhoto(uploadedFiles[uploadedFiles.length - 1]);
+          } else {
+            console.error(
+              "Uploaded files data is missing or invalid:",
+              uploadedFiles
+            );
+          }
         })
         .catch((error) => {
           console.error("Error uploading file:", error);
