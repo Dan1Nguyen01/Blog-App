@@ -58,6 +58,8 @@ const Setting = () => {
         categories: selected.map((item) => item.id),
         intro,
       });
+
+      setIntro(user.intro);
       setReturns("Update Successfull");
     } catch (error) {
       setReturns(error.data);
