@@ -1,5 +1,4 @@
 import { useContext, useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
 import "./setting.css";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
@@ -16,6 +15,7 @@ const Setting = () => {
   const [intro, setIntro] = useState(user?.intro);
   const [returns, setReturns] = useState("");
   const [selected, setSelected] = useState([]);
+
   const handleFileChange = async (e) => {
     e.preventDefault();
     const selectedFile = e.target.files[0];
@@ -23,26 +23,27 @@ const Setting = () => {
     if (selectedFile) {
       const formData = new FormData();
       formData.append("file", selectedFile);
-      axios
-        .post("/api/upload", formData, {
+
+      try {
+        const response = await axios.post("/api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        })
-        .then((response) => {
-          const uploadedFiles = response.data;
-          if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
-            setPhoto(uploadedFiles[uploadedFiles.length - 1]);
-          } else {
-            console.error(
-              "Uploaded files data is missing or invalid:",
-              uploadedFiles
-            );
-          }
-        })
-        .catch((error) => {
-          console.error("Error uploading file:", error);
         });
+
+        const uploadedFiles = response.data.data; // Access the uploadedFiles array directly
+
+        if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
+          setPhoto(uploadedFiles[uploadedFiles.length - 1]);
+        } else {
+          console.error(
+            "Uploaded files data is missing or invalid:",
+            uploadedFiles
+          );
+        }
+      } catch (error) {
+        console.error("Error uploading file:", error);
+      }
     }
   };
 
