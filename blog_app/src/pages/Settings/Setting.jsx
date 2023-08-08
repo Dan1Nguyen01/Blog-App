@@ -56,6 +56,7 @@ const Setting = () => {
         email,
         id: user._id,
         categories: selected.map((item) => item.id),
+        intro,
       });
       setReturns("Update Successfull");
     } catch (error) {

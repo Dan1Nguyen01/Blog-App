@@ -70,7 +70,7 @@ const logout = (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-  const { username, profilePic, email, id, categories } = req.body;
+  const { username, profilePic, email, id, categories, intro } = req.body;
 
   try {
     const user = await User.findById(id);
@@ -83,6 +83,7 @@ const updateUser = async (req, res) => {
     user.profilePic = profilePic;
     user.email = email;
     user.categories = categories;
+    user.intro = intro;
 
     for (const post of posts) {
       post.username = username;
