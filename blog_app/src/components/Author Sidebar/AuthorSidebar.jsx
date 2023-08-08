@@ -29,12 +29,12 @@ const AuthorSidebar = ({ post }) => {
     };
     getAuthor();
   }, [username]);
-  const PF = "https://camel-blog.onrender.com/images/";
+
   return (
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">About Author</span>
-        <img src={PF + authorData?.profilePic} alt="" className="sidebarImg" />
+        <img src={authorData?.profilePic} alt="" className="sidebarImg" />
         <h3>{authorData?.username}</h3>
         <p>{authorData?.intro}</p>
       </div>

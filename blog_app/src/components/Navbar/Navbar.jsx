@@ -13,7 +13,6 @@ const Navbar = () => {
     return navigate("/");
   };
 
-  const PF = "https://camel-blog.onrender.com/images/";
   const logout = async (e) => {
     e.preventDefault();
     await axios.post("/api/user/logout");
@@ -61,7 +60,7 @@ const Navbar = () => {
         {user ? (
           user?.profilePic != "" ? (
             <Link to="/settings">
-              <img className="topImg" src={PF + user?.profilePic} alt="" />
+              <img className="topImg" src={user?.profilePic} alt="" />
             </Link>
           ) : (
             <Link to="/settings">

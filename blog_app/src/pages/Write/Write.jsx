@@ -14,7 +14,6 @@ const Write = () => {
   const { user } = useContext(UserContext);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const PF = "https://camel-blog.onrender.com/images/";
 
   const handlePost = async (e) => {
     e.preventDefault();
@@ -40,11 +39,9 @@ const Write = () => {
     const selectedFile = e.target.files[0];
 
     if (selectedFile) {
-      // Create a FormData object and append the selected file to it
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      // Send the file to the backend for upload
       axios
         .post("/api/upload", formData, {
           headers: {
@@ -52,19 +49,21 @@ const Write = () => {
           },
         })
         .then((response) => {
-          const { data: uploadedFiles } = response;
+          console.log("Upload response:", response); // Log the entire response object
 
-          // Assuming you want to set the first uploaded file as the selected file
+          const uploadedFiles = response.data; // Access the uploadedFiles array directly
 
-          setFile(
-            uploadedFiles.uploadedFiles[uploadedFiles.uploadedFiles.length - 1]
-          ); // Update the file state with the uploaded file path
-
-          console.log(
-            "File uploaded successfully:",
-            uploadedFiles.uploadedFiles[uploadedFiles.uploadedFiles.length - 1]
-          );
-          console.log("File uploaded successfully:", uploadedFiles);
+          if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
+            setFile(uploadedFiles[uploadedFiles.length - 1]);
+          } else {
+            console.error(
+              "Uploaded files data is missing or invalid:",
+              uploadedFiles
+            );
+          }
+        })
+        .catch((error) => {
+          console.error("Error uploading file:", error);
         });
     }
   };
@@ -75,7 +74,7 @@ const Write = () => {
       <div className="write">
         {file && (
           <div className="img-div">
-            <img className="writeImg" src={`${PF}${file}`} alt="" />
+            <img className="writeImg" src={file} alt="Imaged is Here" />
           </div>
         )}
         <form className="writeForm" onSubmit={handlePost}>

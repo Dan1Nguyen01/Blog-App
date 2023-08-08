@@ -13,7 +13,6 @@ const Sidebar = () => {
     getCates();
   }, []);
 
-  const PF = "https://camel-blog.onrender.com/images/";
   const newUserImg = user
     ? user?.profilePic
     : "e528acc397a9780c1f75b382fafe9250.jpg";
@@ -49,7 +48,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebarItem">
         <span className="sidebarTitle">About Me</span>
-        <img src={PF + newUserImg} alt="" className="sidebarImg" />
+        <img src={newUserImg} alt="" className="sidebarImg" />
         {newUserIntro}
       </div>
       <div className="sidebarItem">

@@ -5,8 +5,6 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const SinglePost = ({ post, title, setTitle, desc, setDesc }) => {
-  const PF = "https://camel-blog.onrender.com/images/";
-
   const [updateMode, setUpdateMode] = useState(false);
 
   const { user } = useContext(UserContext);
@@ -36,7 +34,7 @@ const SinglePost = ({ post, title, setTitle, desc, setDesc }) => {
     <div className="singlePost">
       <div className="singlePostWrapper">
         <div className="singlePostImg-div">
-          <img src={PF + post?.photo} alt="" className="singlePostImg" />
+          <img src={post?.photo} alt="" className="singlePostImg" />
         </div>
         {updateMode ? (
           <input

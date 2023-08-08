@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
   const { user, setUser } = useContext(UserContext);
-  const PF = "https://camel-blog.onrender.com/images/";
   const [username, setUsername] = useState(user?.username);
   const [email, setEmail] = useState(user?.email);
   const [password, setPassword] = useState("");
@@ -140,7 +139,7 @@ const Setting = () => {
             <div className="settingProfilePic">
               {photo && (
                 <div className="img-div">
-                  <img className="writeImg" src={`${PF}${photo}`} alt="" />
+                  <img className="writeImg" src={photo} alt="" />
                 </div>
               )}
 
