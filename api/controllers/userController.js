@@ -120,7 +120,7 @@ const updatePassword = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   try {
     const user = await User.findById(id);
     try {

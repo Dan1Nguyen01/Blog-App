@@ -31,7 +31,7 @@ const Setting = () => {
           },
         });
 
-        const uploadedFiles = response.data.data; // Access the uploadedFiles array directly
+        const uploadedFiles = response.data; // Change this line
 
         if (Array.isArray(uploadedFiles) && uploadedFiles.length > 0) {
           setPhoto(uploadedFiles[uploadedFiles.length - 1]);
@@ -49,7 +49,6 @@ const Setting = () => {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.put("/api/user/update", {
         username,
@@ -58,7 +57,6 @@ const Setting = () => {
         id: user._id,
         categories: selected.map((item) => item.id),
       });
-
       setReturns("Update Successfull");
     } catch (error) {
       setReturns(error.data);
@@ -67,14 +65,12 @@ const Setting = () => {
 
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.put("/api/user/updateP", {
         password,
         newPassword,
         id: user._id,
       });
-
       setReturns("Update Successfull");
       setPassword("");
       setNewPassword("");
@@ -86,9 +82,7 @@ const Setting = () => {
     const updatedSelected = selected.filter((item) => item.id !== categoryId);
     setSelected(updatedSelected);
   };
-
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     const getAllCategories = async () => {
       try {
