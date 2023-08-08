@@ -18,16 +18,16 @@ app.use("/images", express.static(path.join(__dirname, "/images")));
 app.use(
   cors({
     credentials: true,
-    // origin: "https://camel-blog.onrender.com/",
-    origin: "http://localhost:3000/",
+    origin: "https://camel-blog.onrender.com/",
+    // origin: "http://localhost:3000/",
     methods: ["GET", "POST", "DELETE", "UPDATE", "PUT", "PATCH"],
   })
 );
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
-  // res.header("Access-Control-Allow-Origin", "https://camel-blog.onrender.com/"); // Replace with your frontend origin
+  // res.header("Access-Control-Allow-Origin", "http://localhost:3000/");
+  res.header("Access-Control-Allow-Origin", "https://camel-blog.onrender.com/"); // Replace with your frontend origin
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE"); // Include PUT in the allowed methods
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.header("Access-Control-Allow-Credentials", true);
