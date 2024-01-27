@@ -83,6 +83,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     console.log(uploadedFiles)
     res.json(uploadedFiles);
   } catch (error) {
+    console.log(error)
     res
       .status(500)
       .json({ error: "An error occurred while processing the upload." });
