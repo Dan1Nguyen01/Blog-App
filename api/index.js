@@ -48,7 +48,7 @@ app.get("/test", (req, res) => {
 
 async function uploadToS3(path, originalname, mimetype) {
   const client = new S3Client({
-    region: "ca-central-1",
+    region: "us-east-1",
     credentials: {
       accessKeyId: process.env.S3_ACCESS_KEY,
       secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
