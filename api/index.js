@@ -80,6 +80,7 @@ app.post("/api/upload", upload.single("file"), async (req, res) => {
     const { path, originalname, mimetype } = req.file;
     const url = await uploadToS3(path, originalname, mimetype);
     uploadedFiles.push(url);
+    console.log(uploadedFiles)
     res.json(uploadedFiles);
   } catch (error) {
     res
